@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <exception>
 
 class	Bureaucrat
 {
@@ -13,8 +14,11 @@ class	Bureaucrat
 		Bureaucrat& operator = (const Bureaucrat& ref);
 		~Bureaucrat(void);
 
+		void		IncrementGrade(void);
+		void		DecrementGrade(void);
 		std::string	getName(void) const;
 		int			getGrade(void) const;
+
 		class GradeTooHighException: public std::exception
 		{
 			public:
