@@ -15,18 +15,26 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator = (const ShrubberyCreatio
 	return (*this);
 }
 
+ShrubberyCreationForm::~ShrubberyCreationForm(void)
+{}
+
 void ShrubberyCreationForm::execute(Bureaucrat const& executor)
 {
-	this->beSigned(executor);
-	if (executor.executeForm(*this) == true)
+	try
 	{
-		std::ofstream file(this->getName() + "_shrubbery");
+		executor.executeForm(*this);
+		std::ofstream file(std::string(this->getName() + "_shrubbery").c_str());
 		if (!file)
 			std::cout << "Couldn't create file\n";
 		else
 		{
+			std::cout << executor.getName() << " executed " << getName() << std::endl;
 			file << "ASCII trees";
 			file.close();
 		}
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << executor.getName() << " couldn't execute " << getName() << " because " << e.what() << std::endl;
 	}
 }

@@ -44,32 +44,18 @@ bool	AForm::isItSigned(void) const
 
 void	AForm::beSigned(const Bureaucrat& bureaucrat)
 {
-	if (bureaucrat.getGrade() > 150)
-		throw AForm::GradeTooLowException();
-	else if (bureaucrat.getGrade() < 1)
-		throw AForm::GradeTooHighException();
-	else if (bureaucrat.getGrade() <= this->_gradeToSign)
-	{
-		std::cout << bureaucrat.getName() << " signed " << this->_name << std::endl;
+	if (bureaucrat.getGrade() <= this->_gradeToSign)
 		_signed = true;
-	}
 	else
-	{
-		std::cout << bureaucrat.getName() << " couldn't sign th Form cause grade is too low" << std::endl;
 		throw AForm::GradeTooLowException();
-	}
 }
 
 bool	AForm::beExecuted(const Bureaucrat& bureaucrat) const
 {
-	if (bureaucrat.getGrade() > 150)
-		throw AForm::GradeTooLowException();
-	else if (bureaucrat.getGrade() < 1)
-		throw AForm::GradeTooHighException();
-	else if (bureaucrat.getGrade() <= this->_gradeToExecute)
-		return false;
-	else
+	if (bureaucrat.getGrade() <= this->_gradeToExecute)
 		return true;
+	else
+		throw GradeTooLowException();
 }
 
 const char*	AForm::GradeTooLowException::what() const throw()
@@ -88,8 +74,8 @@ std::ostream& operator<< (std::ostream& os, const AForm& ref)
 	os << " to be signed and a grade of " << ref.getGradeToExecute();
 	os << " to be executed" << std::endl;
 	if (ref.isItSigned() == true)
-		os << "Current state: Form signed" << std::endl;
+		os << "Current state: Form signed";
 	else
-		os << "Current state: to sign" << std::endl;
+		os << "Current state: to sign";
 	return (os);
 }

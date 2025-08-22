@@ -1,5 +1,5 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 Bureaucrat::Bureaucrat(void)
 {}
@@ -64,13 +64,17 @@ void	Bureaucrat::DecrementGrade(void)
 	}
 }
 
-void	Bureaucrat::signForm(Form& toSign)
+void	Bureaucrat::signForm(AForm& toSign)
 {
-	toSign.beSigned(*this);
-	if (toSign.isItSigned() == true)
-		std::cout << this->_name << " signed " << toSign.getName();
-	else
-		std::cout << _name << " couldn't sign " << toSign.getName() << " cause grade is too low" << std::endl;
+	try
+	{
+		toSign.beSigned(*this);
+		std::cout << this->_name << " signed " << toSign.getName() << std::endl;
+	}
+	catch (const std::exception &e)
+	{
+		std::cout << _name << " couldn't sign " << toSign.getName() << " cause " << e.what() << std::endl;
+	}
 }
 
 const char* Bureaucrat::GradeTooLowException::what() const throw()
@@ -83,20 +87,21 @@ const char* Bureaucrat::GradeTooHighException::what() const throw()
 	return ("Grade is too high");
 }
 
-bool	Bureaucrat::executeForm(const AForm& form) const
+void	Bureaucrat::executeForm(const AForm& form) const
 {
-	if (form.isItSigned() == true && form.beExecuted(*this) == true)
-	{
-		std::cout << this->_name << " executed " << form.getName();
-		return (true);
-	}
-	else
-		std::cout << this->_name << " couldn't execute " << form.getName();
-	return false;
+	if (form.isItSigned() == false)
+		throw FormNotSigned();
+	form.beExecuted(*this);
+	//std::cout << this->_name << " executed " << form.getName() << std::endl;
+}
+
+const char* Bureaucrat::FormNotSigned::what() const throw()
+{
+	return ("form is not signed.\n");
 }
 
 std::ostream&	operator<<(std::ostream& os, const Bureaucrat& ref)
 {
-	os << ref.getName() << ", bureaucrat grade " << ref.getGrade() << "." << std::endl;
+	os << ref.getName() << ", bureaucrat grade " << ref.getGrade() << ".";
 	return (os);
 }

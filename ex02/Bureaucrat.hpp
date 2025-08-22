@@ -21,8 +21,8 @@ class	Bureaucrat
 		void		DecrementGrade(void);
 		std::string	getName(void) const;
 		int			getGrade(void) const;
-		void		signForm(Form& toSign);
-		bool		executeForm(AForm const& form) const;
+		void		signForm(AForm& toSign);
+		void		executeForm(AForm const& form) const;
 
 		class GradeTooHighException: public std::exception
 		{
@@ -30,6 +30,11 @@ class	Bureaucrat
 				const char* what() const throw();
 		};
 		class GradeTooLowException: public std::exception
+		{
+			public:
+				const char* what() const throw();
+		};
+		class	FormNotSigned : public std::exception
 		{
 			public:
 				const char* what() const throw();

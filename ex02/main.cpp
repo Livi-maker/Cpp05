@@ -1,56 +1,56 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 int main()
 {
 	try
 	{
-		Form		Form("first Form", 50, 70);
-		std::cout << Form << std::endl;
-		Bureaucrat first("Liv", 42);
-		std::cout << "VALID INCREMENT\n\n";
-		std::cout << first << std::endl;
-		first.IncrementGrade();
-		std::cout << first << std::endl;
-		Form.beSigned(first);
-		std::cout << Form << std::endl;
+		std::cout << "SHRUBBERY\n\n";
+		ShrubberyCreationForm	form("target");
+		Bureaucrat prova("42", 70);
+		std::cout << prova << std::endl;
+		std::cout << form << std::endl << std::endl;
+
+		prova.signForm(form);
+		form.execute(prova);
 	}
 	catch (const std::exception &e)
 	{
-		std::cout << e.what() << std::endl;
+		std::cerr << e.what() << std::endl;
 	}
 	try
 	{
-		Form Form("second Form", 50, 70);
-		Bureaucrat second("Worst Bureaucrat", 150);
-		std::cout << "\n\nINVALID DECREMENT\n\n";
-		std::cout << second << std::endl;
-		Form.beSigned(second);
-		second.DecrementGrade();
-		std::cout << second << std::endl;
+		std::cout << "\nROBOTOMY\n\n";
+		RobotomyRequestForm second("robot");
+		Bureaucrat	prova("Liv", 70);
+
+		std::cout << prova << std::endl;
+		std::cout << second << std::endl << std::endl;
+
+		prova.signForm(second);
+		second.execute(prova);
 	}
-	catch (const std::exception &e)
+	catch(const std::exception& e)
 	{
-		std::cout << e.what() << std::endl;
-	}
-	try
-	{
-		Bureaucrat third("Best Bureaucrat", 1);
-		std::cout << "\n\nINVALID INCREMENT\n\n";
-		std::cout << third << std::endl;
-		third.IncrementGrade();
-	}
-	catch (const std::exception &e)
-	{
-		std::cout << e.what() << std::endl;
+		std::cerr << e.what() << '\n';
 	}
 	try
 	{
-		std::cout << "\n\nINVALID CREATION\n\n";
-		Bureaucrat invalid("invalid", -42);
+		std::cout << "\nPARDON\n\n";
+		PresidentialPardonForm second("robot");
+		Bureaucrat	prova("Liv", 70);
+
+		std::cout << prova << std::endl;
+		std::cout << second << std::endl << std::endl;
+
+		prova.signForm(second);
+		second.execute(prova);
 	}
-	catch (const std::exception &e)
+	catch(const std::exception& e)
 	{
-		std::cout << e.what() << std::endl;
+		std::cerr << e.what() << '\n';
 	}
 }
