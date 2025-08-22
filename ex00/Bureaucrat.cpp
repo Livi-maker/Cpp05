@@ -75,6 +75,6 @@ const char* Bureaucrat::GradeTooHighException::what() const throw()
 
 std::ostream&	operator<<(std::ostream& os, const Bureaucrat& ref)
 {
-	os << ref.getName() << ", bureaucrat grade " << ref.getGrade() << "." << std::endl;
+	os << ref.getName() << ", bureaucrat grade " << ref.getGrade() << ".";
 	return (os);
 }
