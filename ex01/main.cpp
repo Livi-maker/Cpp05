@@ -5,14 +5,10 @@ int main()
 {
 	try
 	{
-		Form		Form("first Form", 50, 70);
+		Form		Form("first", 50, 70);
 		std::cout << Form << std::endl;
 		Bureaucrat first("Liv", 42);
-		std::cout << "VALID INCREMENT\n\n";
-		std::cout << first << std::endl;
-		first.IncrementGrade();
-		std::cout << first << std::endl;
-		Form.beSigned(first);
+		first.signForm(Form);
 		std::cout << Form << std::endl;
 	}
 	catch (const std::exception &e)
@@ -21,13 +17,11 @@ int main()
 	}
 	try
 	{
-		Form Form("second Form", 50, 70);
+		Form Form("second", 50, 70);
 		Bureaucrat second("Worst Bureaucrat", 150);
-		std::cout << "\n\nINVALID DECREMENT\n\n";
-		std::cout << second << std::endl;
-		Form.beSigned(second);
-		second.DecrementGrade();
-		std::cout << second << std::endl;
+		std::cout << "\nLOW VOTE\n\n";
+		second.signForm(Form);
+		std::cout << Form << std::endl;
 	}
 	catch (const std::exception &e)
 	{
@@ -35,19 +29,8 @@ int main()
 	}
 	try
 	{
-		Bureaucrat third("Best Bureaucrat", 1);
-		std::cout << "\n\nINVALID INCREMENT\n\n";
-		std::cout << third << std::endl;
-		third.IncrementGrade();
-	}
-	catch (const std::exception &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	try
-	{
-		std::cout << "\n\nINVALID CREATION\n\n";
-		Bureaucrat invalid("invalid", -42);
+		std::cout << "\nINVALID CREATION\n\n";
+		Form invalid("invalid", -42, 150);
 	}
 	catch (const std::exception &e)
 	{

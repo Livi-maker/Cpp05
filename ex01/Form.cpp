@@ -44,20 +44,10 @@ bool	Form::isItSigned(void) const
 
 void	Form::beSigned(const Bureaucrat& bureaucrat)
 {
-	if (bureaucrat.getGrade() > 150)
-		throw Form::GradeTooLowException();
-	else if (bureaucrat.getGrade() < 1)
-		throw Form::GradeTooHighException();
-	else if (bureaucrat.getGrade() <= this->_gradeToSign)
-	{
-		std::cout << bureaucrat.getName() << " signed " << this->_name << std::endl;
+	if (bureaucrat.getGrade() <= this->_gradeToSign)
 		_signed = true;
-	}
 	else
-	{
-		std::cout << bureaucrat.getName() << " couldn't sign th Form cause grade is too low" << std::endl;
 		throw GradeTooLowException();
-	}
 }
 
 const char*	Form::GradeTooLowException::what() const throw()
@@ -76,8 +66,8 @@ std::ostream& operator<< (std::ostream& os, const Form& ref)
 	os << " to be signed and a grade of " << ref.getGradeToExecute();
 	os << " to be executed" << std::endl;
 	if (ref.isItSigned() == true)
-		os << "Current state: Form signed" << std::endl;
+		os << "Current state: signed";
 	else
-		os << "Current state: to sign" << std::endl;
+		os << "Current state: to sign";
 	return (os);
 }

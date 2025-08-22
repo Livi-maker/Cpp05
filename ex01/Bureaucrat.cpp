@@ -66,11 +66,15 @@ void	Bureaucrat::DecrementGrade(void)
 
 void	Bureaucrat::signForm(Form& toSign)
 {
-	toSign.beSigned(*this);
-	if (toSign.isItSigned() == true)
-		std::cout << this->_name << " signed " << toSign.getName();
-	else
-		std::cout << _name << " couldn't sign " << toSign.getName() << " cause grade is too low" << std::endl;
+	try
+	{
+		toSign.beSigned(*this);
+		std::cout << this->_name << " signed " << toSign.getName() << std::endl;
+	}
+	catch (const std::exception &e)
+	{
+		std::cout << _name << " couldn't sign " << toSign.getName() << " cause " << e.what() << std::endl;
+	}
 }
 
 const char* Bureaucrat::GradeTooLowException::what() const throw()
@@ -85,6 +89,6 @@ const char* Bureaucrat::GradeTooHighException::what() const throw()
 
 std::ostream&	operator<<(std::ostream& os, const Bureaucrat& ref)
 {
-	os << ref.getName() << ", bureaucrat grade " << ref.getGrade() << "." << std::endl;
+	os << ref.getName() << ", bureaucrat grade " << ref.getGrade() << ".";
 	return (os);
 }
