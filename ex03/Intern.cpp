@@ -19,7 +19,7 @@ AForm* Intern::makeForm(std::string type, std::string target)
 {
 	AForm* functions[3];
 	AForm* object = NULL;
-	std::string types[3] = {"shrubbery form", "robotomy form", "presidential form"};
+	std::string types[3] = {"shrubbery request", "robotomy request", "presidential request"};
 
 	functions[0] = new ShrubberyCreationForm(target);
 	functions[1] = new RobotomyRequestForm(target);
@@ -36,6 +36,6 @@ AForm* Intern::makeForm(std::string type, std::string target)
 			delete functions[i];
 	}
 	if (!object)
-		throw std::runtime_error("type not recognized\n");
+		throw std::runtime_error("type not recognized");
 	return (object);
 }
