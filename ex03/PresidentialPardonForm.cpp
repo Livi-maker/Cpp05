@@ -18,11 +18,11 @@ PresidentialPardonForm& PresidentialPardonForm::operator = (const PresidentialPa
 PresidentialPardonForm::~PresidentialPardonForm(void)
 {}
 
-void PresidentialPardonForm::execute(Bureaucrat const& executor)
+void PresidentialPardonForm::execute(Bureaucrat const& executor) const
 {
 	try
 	{
-		executor.executeForm(*this);
+		beExecuted(executor);
 		std::cout << getName() << " has been pardoned by Zaphod Beeblebrox." << std::endl;
 	}
 	catch(const std::exception& e)

@@ -70,7 +70,7 @@ const char*	AForm::GradeTooHighException::what() const throw()
 
 std::ostream& operator<< (std::ostream& os, const AForm& ref)
 {
-	os << "Form " <<ref.getName() << " needs a grade of " << ref.getGradeToSign();
+	os << "Form " << ref.getName() << " needs a grade of " << ref.getGradeToSign();
 	os << " to be signed and a grade of " << ref.getGradeToExecute();
 	os << " to be executed" << std::endl;
 	if (ref.isItSigned() == true)

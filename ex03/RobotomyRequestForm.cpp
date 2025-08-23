@@ -18,11 +18,11 @@ RobotomyRequestForm& RobotomyRequestForm::operator = (const RobotomyRequestForm&
 RobotomyRequestForm::~RobotomyRequestForm(void)
 {}
 
-void RobotomyRequestForm::execute(Bureaucrat const& executor)
+void RobotomyRequestForm::execute(Bureaucrat const& executor) const
 {
 	try
 	{
-		executor.executeForm(*this);
+		beExecuted(executor);
 		std::cout << "GHSUgdhjdenfurbvcjwefneqi" << std::endl;
 		std::cout << getName() << " has been robotomized." << std::endl;
 	}

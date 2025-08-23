@@ -18,11 +18,11 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator = (const ShrubberyCreatio
 ShrubberyCreationForm::~ShrubberyCreationForm(void)
 {}
 
-void ShrubberyCreationForm::execute(Bureaucrat const& executor)
+void ShrubberyCreationForm::execute(Bureaucrat const& executor) const
 {
 	try
 	{
-		executor.executeForm(*this);
+		beExecuted(executor);
 		std::ofstream file(std::string(this->getName() + "_shrubbery").c_str());
 		if (!file)
 			std::cout << "Couldn't create file\n";

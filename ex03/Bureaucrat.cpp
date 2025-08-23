@@ -92,6 +92,7 @@ void	Bureaucrat::executeForm(const AForm& form) const
 	if (form.isItSigned() == false)
 		throw FormNotSigned();
 	form.beExecuted(*this);
+	form.execute(*this);
 	//std::cout << this->_name << " executed " << form.getName() << std::endl;
 }
 

@@ -4,6 +4,7 @@
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 #include "Intern.hpp"
+#include <sstream>
 
 int main()
 {
@@ -37,9 +38,12 @@ int main()
 	{
 		Intern prova;
 		AForm* form;
+		Bureaucrat one("bur", 1);
 
 		form = prova.makeForm("shrubbery request", "home");
 		std::cout << *form << std::endl;
+		one.signForm(*form);
+		one.executeForm(*form);
 		delete form;
 	}
 	catch (const std::exception &e)
@@ -60,3 +64,4 @@ int main()
 		std::cerr << e.what() << std::endl;
 	}
 }
+
